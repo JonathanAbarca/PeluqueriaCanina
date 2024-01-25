@@ -1,6 +1,7 @@
 
 package com.mycompany.peluqueriacanina.logica;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,7 @@ import javax.persistence.Id;
  * @author Jonathan Abarca
  */
 @Entity //se transforma en entidades para crear las tablas en la BD
-public class Mascota {    
+public class Mascota implements Serializable {    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int num_Cleinte;
@@ -22,7 +23,7 @@ public class Mascota {
     private String color;
     private String alergico;
     private String atencion_especial;
-    private Duenio unDuenio;
+    //private Duenio unDuenio;
     private String observaciones; 
     public Mascota() {
     }
@@ -35,7 +36,7 @@ public class Mascota {
         this.alergico = alergico;
         this.atencion_especial = atencion_especial;
         this.observaciones = observaciones;
-        this.unDuenio = unDuenio;
+        //this.unDuenio = unDuenio;
     }
 
     public int getNum_Cleinte() {
@@ -93,7 +94,7 @@ public class Mascota {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-
+/*
     public Duenio getUnDuenio() {
         return unDuenio;
     }
@@ -102,6 +103,5 @@ public class Mascota {
         this.unDuenio = unDuenio;
     }
     
-    
-    
-}
+  */  
+    }
