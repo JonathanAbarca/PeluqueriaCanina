@@ -4,7 +4,7 @@
  */
 package com.mycompany.peluqueriacanina.persistencia;
 
-import com.mycompany.peluqueriacanina.logica.Mascota;
+import com.mycompany.peluqueriacanina.logica.Duenio;
 import com.mycompany.peluqueriacanina.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -20,25 +20,28 @@ import javax.persistence.criteria.Root;
  *
  * @author Jonathan Abarca
  */
-public class MascotaJpaController implements Serializable {
+public class DuenioJpaController implements Serializable {
 
-    public MascotaJpaController(EntityManagerFactory emf) {
+    public DuenioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
-    
-    public MascotaJpaController(){
+
+    public DuenioJpaController() {
         emf = Persistence.createEntityManagerFactory("PeluPersistenciaJPU");
     }
+    
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    public void create(Mascota mascota) {
+
+    public void create(Duenio duenio) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(mascota);
+            em.persist(duenio);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -47,19 +50,19 @@ public class MascotaJpaController implements Serializable {
         }
     }
 
-    public void edit(Mascota mascota) throws NonexistentEntityException, Exception {
+    public void edit(Duenio duenio) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            mascota = em.merge(mascota);
+            duenio = em.merge(duenio);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                int id = mascota.getNum_Cleinte();
-                if (findMascota(id) == null) {
-                    throw new NonexistentEntityException("The mascota with id " + id + " no longer exists.");
+                int id = duenio.getId_duenio();
+                if (findDuenio(id) == null) {
+                    throw new NonexistentEntityException("The duenio with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -75,14 +78,14 @@ public class MascotaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Mascota mascota;
+            Duenio duenio;
             try {
-                mascota = em.getReference(Mascota.class, id);
-                mascota.getNum_Cleinte();
+                duenio = em.getReference(Duenio.class, id);
+                duenio.getId_duenio();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The mascota with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The duenio with id " + id + " no longer exists.", enfe);
             }
-            em.remove(mascota);
+            em.remove(duenio);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -91,19 +94,19 @@ public class MascotaJpaController implements Serializable {
         }
     }
 
-    public List<Mascota> findMascotaEntities() {
-        return findMascotaEntities(true, -1, -1);
+    public List<Duenio> findDuenioEntities() {
+        return findDuenioEntities(true, -1, -1);
     }
 
-    public List<Mascota> findMascotaEntities(int maxResults, int firstResult) {
-        return findMascotaEntities(false, maxResults, firstResult);
+    public List<Duenio> findDuenioEntities(int maxResults, int firstResult) {
+        return findDuenioEntities(false, maxResults, firstResult);
     }
 
-    private List<Mascota> findMascotaEntities(boolean all, int maxResults, int firstResult) {
+    private List<Duenio> findDuenioEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Mascota.class));
+            cq.select(cq.from(Duenio.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -115,20 +118,20 @@ public class MascotaJpaController implements Serializable {
         }
     }
 
-    public Mascota findMascota(int id) {
+    public Duenio findDuenio(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Mascota.class, id);
+            return em.find(Duenio.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getMascotaCount() {
+    public int getDuenioCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Mascota> rt = cq.from(Mascota.class);
+            Root<Duenio> rt = cq.from(Duenio.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

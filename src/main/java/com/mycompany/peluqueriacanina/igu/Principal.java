@@ -1,6 +1,8 @@
 
 package com.mycompany.peluqueriacanina.igu;
 
+import com.mycompany.peluqueriacanina.logica.Controladora;
+
 /**
  *
  * @author Jonathan Abarca
@@ -8,7 +10,7 @@ package com.mycompany.peluqueriacanina.igu;
 public class Principal extends javax.swing.JFrame {
 
     
-    public Principal() {
+    public Principal() {        
         initComponents();
     }
 

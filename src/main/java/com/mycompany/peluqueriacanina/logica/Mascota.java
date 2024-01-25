@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -22,21 +23,23 @@ public class Mascota implements Serializable {
     private String raza;
     private String color;
     private String alergico;
-    private String atencion_especial;
-    //private Duenio unDuenio;
-    private String observaciones; 
+    private String atencion_especial;    
+    private String observaciones;
+    @OneToOne //realción uno a uno como clave foraneo en la BD 
+    private Duenio unDuenio;
+    
     public Mascota() {
     }
 
-    public Mascota(int num_Cleinte, String nombre, String raza, String color, String alergico, String atencion_especial, String observaciones, Duenio unDuenio) {
+    public Mascota(int num_Cleinte, String nombre, String raza, String color, String alergico, String atencion_especial, Duenio unDuenio, String observaciones) {
         this.num_Cleinte = num_Cleinte;
         this.nombre = nombre;
         this.raza = raza;
         this.color = color;
         this.alergico = alergico;
         this.atencion_especial = atencion_especial;
-        this.observaciones = observaciones;
-        //this.unDuenio = unDuenio;
+        this.unDuenio = unDuenio;
+        this.observaciones = observaciones;        
     }
 
     public int getNum_Cleinte() {
@@ -87,14 +90,6 @@ public class Mascota implements Serializable {
         this.atencion_especial = atencion_especial;
     }
 
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
-    }
-/*
     public Duenio getUnDuenio() {
         return unDuenio;
     }
@@ -102,6 +97,13 @@ public class Mascota implements Serializable {
     public void setUnDuenio(Duenio unDuenio) {
         this.unDuenio = unDuenio;
     }
-    
-  */  
+
+    public String getObservaciones() {
+        return observaciones;
     }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+    
+}

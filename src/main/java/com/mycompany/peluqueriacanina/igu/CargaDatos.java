@@ -1,19 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.mycompany.peluqueriacanina.igu;
+
+import com.mycompany.peluqueriacanina.logica.Controladora;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jonathan Abarca
  */
 public class CargaDatos extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CargaDatos
-     */
+    Controladora control = new Controladora();
+    
     public CargaDatos() {
+        //control = new Controladora();
         initComponents();
     }
 
@@ -62,6 +62,11 @@ public class CargaDatos extends javax.swing.JFrame {
 
         btnGuardar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jonathan Abarca\\Documents\\NetBeansProjects\\PeluqueriaCanina\\img\\guardar.png")); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jonathan Abarca\\Documents\\NetBeansProjects\\PeluqueriaCanina\\img\\imgPerro.jpg")); // NOI18N
 
@@ -81,23 +86,12 @@ public class CargaDatos extends javax.swing.JFrame {
 
         jLabel11.setText("Observaciones:");
 
-        txtNombre.setToolTipText("");
-
-        txtRaza.setToolTipText("");
-
-        txtColor.setToolTipText("");
-
         cmbAlegico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
 
         cmbEspecial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
 
-        txtDueno.setToolTipText("");
-
-        txtCel.setToolTipText("");
-
         txtObs.setColumns(20);
         txtObs.setRows(5);
-        txtObs.setToolTipText("1");
         jScrollPane1.setViewportView(txtObs);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -241,6 +235,28 @@ public class CargaDatos extends javax.swing.JFrame {
         cmbEspecial.setSelectedIndex(0);
         
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        String nombreMasco = txtNombre.getText();
+        String raza = txtRaza.getText();
+        String color = txtColor.getText();
+        String obs = txtObs.getText();
+        String alergico = (String) cmbAlegico.getSelectedItem();
+        String especial = (String) cmbAlegico.getSelectedItem();
+        
+        String nomDuenio = txtDueno.getText();
+        String celDuenio = txtCel.getText();
+        
+        
+        control.guardar(nombreMasco,raza,color,obs,alergico,especial,nomDuenio,celDuenio);
+        
+        JOptionPane optionPane = new JOptionPane("Se guardo Correctamente");
+        optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Guardado Exitoso");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;

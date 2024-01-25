@@ -3,6 +3,7 @@
   <persistence-unit name="PeluPersistenciaJPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.mycompany.peluqueriacanina.logica.Mascota</class>
+    <class>com.mycompany.peluqueriacanina.logica.Duenio</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/peluqueria_canina?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
