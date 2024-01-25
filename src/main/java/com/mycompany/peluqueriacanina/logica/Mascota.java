@@ -1,22 +1,29 @@
 
 package com.mycompany.peluqueriacanina.logica;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author Jonathan Abarca
  */
-public class Mascota {
-    
+@Entity //se transforma en entidades para crear las tablas en la BD
+public class Mascota {    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int num_Cleinte;
+    @Basic//campos extras        
     private String nombre;
     private String raza;
     private String color;
     private String alergico;
     private String atencion_especial;
-    private String observaciones;
-    
     private Duenio unDuenio;
-
+    private String observaciones; 
     public Mascota() {
     }
 
