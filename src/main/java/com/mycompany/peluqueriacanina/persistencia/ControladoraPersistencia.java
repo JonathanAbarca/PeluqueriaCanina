@@ -1,8 +1,7 @@
-
 package com.mycompany.peluqueriacanina.persistencia;
-
 import com.mycompany.peluqueriacanina.logica.Duenio;
 import com.mycompany.peluqueriacanina.logica.Mascota;
+import java.util.List;
 
 
 
@@ -19,6 +18,12 @@ public class ControladoraPersistencia {
         duenioJpa.create(duenio);
          //crear en la BD el dueño
         mascotaJpa.create(mascota);
+        
+    }
+
+    public List<Mascota> traerMascotas() {
+        
+        return mascotaJpa.findMascotaEntities();
         
     }
 }
